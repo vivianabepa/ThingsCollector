@@ -22,6 +22,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         tableView.dataSource = self
         tableView.delegate = self
         
+        
+        
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -49,6 +51,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return cell
     }
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let thing = things[indexPath.row]
+        performSegue(withIdentifier: "thingSegue", sender: thing)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let nextVC = segue.destination as! ThingsViewController
+        nextVC.thing = sender as? Thing
+    }
 
 }
 
